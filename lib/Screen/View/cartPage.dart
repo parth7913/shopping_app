@@ -54,14 +54,15 @@ class _CartPageState extends State<CartPage> {
                   ),
                   IconButton(
                     onPressed: () {
-                      HomeModel homeModel=HomeModel(qua: homeController.CartList[index].qua!-1);
-                      if (homeController.CartList[index].qua != 0) {
-                        homeController.CartList[index].qua =
-                            (homeController.CartList[index]=homeModel) as int?;
-                      }
-                      if (homeController.CartList[index].qua == 0) {
-                        homeController.CartList.value.removeAt(index);
-                      }
+                      setState(() {
+                        if (homeController.CartList[index].qua != 0) {
+                          homeController.CartList[index].qua =
+                              homeController.CartList[index].qua! - 1;
+                        }
+                        if (homeController.CartList[index].qua == 0) {
+                          homeController.CartList.value.removeAt(index);
+                        }
+                      });
                     },
                     icon: Icon(Icons.remove),
                   ),
@@ -70,7 +71,9 @@ class _CartPageState extends State<CartPage> {
                   ),
                   IconButton(
                     onPressed: () {
+                      setState(() {
                         homeController.CartList.value.removeAt(index);
+                      });
                     },
                     icon: Icon(Icons.delete),
                   ),
